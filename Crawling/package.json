@@ -4,24 +4,16 @@
   "description": "## Purpose",
   "main": "index.js",
   "directories": {
-    "test": "tests"
-  },
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "jest": "^22.4.4",
-    "nightwatch": "^0.9.21",
-    "selenium-server": "^3.8.1",
-    "selenium-standalone": "^6.15.0",
-    "selenium-webdriver": "^4.0.0-alpha.1"
-  },
-  "devDependencies": {
-    "chromedriver": "^2.37.544337"
+    "test": "test"
   },
   "scripts": {
-    "test-e2e": "nightwatch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "nightmare": "^3.0.1"
+  }
 }
