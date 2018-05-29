@@ -1,5 +1,6 @@
 const Nightmare = require('nightmare');
 const nightmare = Nightmare({ show: true });
+const scrape = require('./scrape')
 
 const nav = function(url, term) {
   nightmare
@@ -8,7 +9,7 @@ const nav = function(url, term) {
   .click('.nav-searchbar .nav-right .nav-search-submit input[type="submit"]')
   // check to see if new page loaded for Book Searches
   .wait("#nav-subnav a .nav-a-content")
-  // get list of books...
+  // get list of books scrape()
 
   .evaluate(function() {
     if (document.querySelector('img[alt="Books at Amazon"]')) {

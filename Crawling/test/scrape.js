@@ -1,19 +1,32 @@
-var Nightmare = require("nightmare");
+const cheerio = require('cheerio');
+const request = require('request');
+const uri = 'https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=Books';
 
-var nightmare = Nightmare({ show: true });
+const scrape = function() {
+  request('https://www.amazon.com', function(error, response, html) {
+    let $ = cheerio.load(html);
+    console.log(html)
+    // console.log(response)
+    // let books = []
 
-nightmare
-  .goto("https://duckduckgo.com")
-  .type("#search_form_input_homepage", "github nightmare")
-  .click("#search_button_homepage")
-  .wait("#links a")
-  .evaluate(function() {
-    return document.querySelector("#links a").href;
+    // let parent = $('ol').hasClass('a-carousel')
+    // let booklist = $(parent).children('li')
+
+    // $('li').each(function(i, element) {
+    //   // let title = $(element).attr('title')
+    //   console.log($(this)); 
+    // })
+    // $('.a-carousel-center').each(function(i, element) {
+    // $('li.a-carousel-card').each(function(i, element) {
+      // books[i] = $(this).children()
+      // console.log(element)
+      // let a = $(element).children('a').attr('title')
+      // console.log(a)
+    // })
+    // console.log(books)
   })
-  .end()
-  .then(function(result) {
-    console.log(result);
-  })
-  .catch(function(error) {
-    console.error("Search failed:", error);
-  });
+}
+
+scrape();
+
+// module.exports = scrape;
