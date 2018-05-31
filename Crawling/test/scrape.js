@@ -1,29 +1,33 @@
 const cheerio = require('cheerio');
 const request = require('request');
-const uri = 'https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=Books';
+const uri = 'https://www.walmart.com/search/?query=Books&redirect=false';
 
 const scrape = function() {
-  request('https://www.amazon.com', function(error, response, html) {
+  request(uri, function(error, response, html) {
     let $ = cheerio.load(html);
-    console.log(html)
-    // console.log(response)
-    // let books = []
 
-    // let parent = $('ol').hasClass('a-carousel')
-    // let booklist = $(parent).children('li')
+    $('div').each(function(i, el) {
+      let node = $(el).attr('data-tl-id')
 
-    // $('li').each(function(i, element) {
+      if (node = `ProductTileListView-${i}`) {
+        console.log(node)
+      }
+      
+    })
+    // for(n=0; n<10; n++) {
+    //   $(`div[data-tl-id="ProductTileListView-${n}"]`).each(function(i, el) {
+    //     let node = $(el)
+    //     console.log(node)
+    //   });
+    // }
+
+    // $('.search-result-listview-items').each(function(i, element) {
     //   // let title = $(element).attr('title')
-    //   console.log($(this)); 
+
+    //   let node =  $(element).children('div').attr('data-tl-id')// === 'ProductTileListView-'+i
+    //   console.log(node)
     // })
-    // $('.a-carousel-center').each(function(i, element) {
-    // $('li.a-carousel-card').each(function(i, element) {
-      // books[i] = $(this).children()
-      // console.log(element)
-      // let a = $(element).children('a').attr('title')
-      // console.log(a)
-    // })
-    // console.log(books)
+
   })
 }
 

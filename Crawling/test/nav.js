@@ -1,24 +1,25 @@
 const Nightmare = require('nightmare');
 const nightmare = Nightmare({ show: true });
-const scrape = require('./scrape')
+// const scrape = require('./scrape')
 
 const nav = function(url, term) {
   nightmare
   .goto(url)
-  .type(`.nav-searchbar .nav-fill .nav-search-field .nav-input`, `${term}`)
-  .click('.nav-searchbar .nav-right .nav-search-submit input[type="submit"]')
+  .type(`.GlobalHeaderSearchbar-input`, `${term}`)
+  .click('.GlobalHeaderSearchbar-submit button .elc-icon-search-nav')
   // check to see if new page loaded for Book Searches
-  .wait("#nav-subnav a .nav-a-content")
+  .wait('nav .MainNavButton h2 .MainNavButton-label')
+  .click('a.RedirectMessage-link')
+  .wait('h1.breadcrumb-leaf')
   // get list of books scrape()
 
   .evaluate(function() {
-    if (document.querySelector('img[alt="Books at Amazon"]')) {
-      return true;
-    }
+    return window.location.href
+    // document.querySelector('nav .MainNavButton h2 .MainNavButton-label').text
   })
   .end()
   .then(function(result) {
-    console.log(result);
+    scrape(result)
   })
   .catch(function(error) {
     console.error('Search failed:', error)
