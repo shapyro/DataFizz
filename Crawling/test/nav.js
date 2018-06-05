@@ -1,6 +1,6 @@
 const Nightmare = require('nightmare');
 const nightmare = Nightmare({ show: true });
-// const scrape = require('./scrape')
+const scrape = require('./scrape')
 
 const nav = function(url, term) {
   nightmare
@@ -11,14 +11,13 @@ const nav = function(url, term) {
   .wait('nav .MainNavButton h2 .MainNavButton-label')
   .click('a.RedirectMessage-link')
   .wait('h1.breadcrumb-leaf')
-  // get list of books scrape()
-
   .evaluate(function() {
     return window.location.href
     // document.querySelector('nav .MainNavButton h2 .MainNavButton-label').text
   })
   .end()
   .then(function(result) {
+    console.log('NavURL Result: ' + result)
     scrape(result)
   })
   .catch(function(error) {
